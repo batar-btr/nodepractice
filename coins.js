@@ -1,4 +1,5 @@
 var express = require('express');
+var fortune = require('./mylibs/www.js');
 var app = express();
 
 // Установка механизма представления handlebars
@@ -15,9 +16,7 @@ app.get('/', function (req, res) {
     res.render('home');
 });
 app.get('/about', function (req, res) {
-    var randomFortune =
-        fortunes[Math.floor(Math.random() * fortunes.length)];
-    res.render('about', { fortune: randomFortune });
+    res.render('about', { fortune: fortune.getFortune() } );
 });
 // Обобщенный обработчик 404 (промежуточное ПО)
 app.use(function (req, res, next) {
@@ -38,10 +37,4 @@ app.listen(app.get('port'), function () {
 
 
 
-var fortunes = [
-    "Победи свои страхи, или они победят тебя.",
-    "Рекам нужны истоки.",
-    "Не бойся неведомого.",
-    "Тебя ждет приятный сюрприз.",
-    "Будь проще везде, где только можно.",
-];
+console.log(fortune);
